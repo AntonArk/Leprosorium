@@ -9,11 +9,14 @@ def init_db
 end
 
 before do 
+	# инициализация БД
 	init_db
 end
 
 configure do
 	init_db
+
+	# создаем таблицу если таблица не существует
 	@db.execute 'CREATE TABLE IF NOT EXISTS
 	    "Posts" 
 	    (
@@ -24,6 +27,9 @@ configure do
 		)'
 end
 
+# обработчик get-запроса /new
+# (браузер получает страницу с сервера)
+
 get '/' do
 	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"			
 end
@@ -32,8 +38,11 @@ get '/new' do
   	erb :new
 end
 
-post '/new' do
+# обработчик post-запроса /new
+# (браузер отправляет данные на сервер)
 
+post '/new' do
+    # получаем переменную из post-запроса
 	content = params[:content]
 
 	erb "You typed #{content}"

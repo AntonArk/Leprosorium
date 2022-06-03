@@ -55,5 +55,7 @@ post '/new' do
     #сохранение данных в БД
 	@db.execute 'INSERT INTO Posts (content, created_date) VALUES (?,datetime())', [content]
 
-	erb "You typed #{content}"
+	# перенаправление на главную страницу
+	redirect to '/'
+	
 end

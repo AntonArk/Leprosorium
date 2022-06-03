@@ -31,6 +31,8 @@ end
 # (браузер получает страницу с сервера)
 
 get '/' do
+	# выбираем список постов из БД
+	@results = @db.execute 'SELECT * FROM POSTS ORDER BY id DESC'
 	erb :index
 end
 

@@ -91,3 +91,14 @@ post '/details/:post_id' do
 
 	erb "You typed comment #{content} for post #{post_id}"
 end
+
+# создаем таблицу если таблица не существует
+	@db.execute 'CREATE TABLE IF NOT EXISTS
+	    "Comments" 
+	    (
+	    	"id"	INTEGER,
+			"created_date"	DATE,
+			"content"	TEXT,
+			"post_id" INTEGER,
+			PRIMARY KEY("id" AUTOINCREMENT)
+		)'
